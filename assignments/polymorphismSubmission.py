@@ -4,7 +4,7 @@ class Vehicle:
       year = "2011"
       make = "subaru"
       model = "legacy"
-      transport_type = "land"
+      engine_type = "four cylinder"
 
       def buyVehicleInfo(self):
             entry_year = input("Enter vehicle year: ")
@@ -18,15 +18,14 @@ class Vehicle:
 class Plane:
       number_of_wings = 2
       licence_requirement = "Commercial Pilot's Licence"
-      transport_type = "air"
+      turbine_type = "underwing turbofan" 
 
 # Child class boat
 class Boat:
       boat_type = "commercial fishing"
       water_type = "ocean"
-      transport_type = "water"
+      motor_type = "marine diesel"
       
-      
-      
+
       
     
