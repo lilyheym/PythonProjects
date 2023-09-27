@@ -11,7 +11,7 @@ class Vehicle:
             entry_make = input("Enter vehicle make: ")
             entry_model = input("Enter vehicle model: ")
             engine_type = input("Enter vehicle engine: ")
-                  print("Sweet! We'll find a {} {} {} with a {} engine for your as soon as we can!".format(entry_year,entry_make,entry_model,engine_type))
+            print("Sweet! We'll find a {} {} {} with a {} engine for your as soon as we can!".format(entry_year,entry_make,entry_model,engine_type))
             
 
 
@@ -22,11 +22,11 @@ class Plane(Vehicle):
       turbine_type = "underwing turbofan"
 
       def buyVehicleInfo(self):
-              entry_year = input("Enter vehicle year: ")
+            entry_year = input("Enter vehicle year: ")
             entry_make = input("Enter vehicle make: ")
             entry_model = input("Enter vehicle model: ")
             turbine_type = input("Enter vehicle engine: ")
-                  print("Sweet! We'll find a {} {} {} with {} turbines for your as soon as we can!".format(entry_year,entry_make,entry_model,turbine_type))
+            print("Sweet! We'll find a {} {} {} with {} turbines for your as soon as we can!".format(entry_year,entry_make,entry_model,turbine_type))
             
 
             
@@ -38,14 +38,21 @@ class Boat(Vehicle):
       motor_type = "marine diesel"
 
       def buyVehicleInfo(self):
-              entry_year = input("Enter vehicle year: ")
+            entry_year = input("Enter vehicle year: ")
             entry_make = input("Enter vehicle make: ")
             entry_model = input("Enter vehicle model: ")
             motor_type = input("Enter vehicle engine: ")
-                  print("Sweet! We'll find a {} {} {} with a {} motor for your as soon as we can!".format(entry_year,entry_make,entry_model,motor_type))
+            print("Sweet! We'll find a {} {} {} with a {} motor for your as soon as we can!".format(entry_year,entry_make,entry_model,motor_type))
             
 
       
+customer = Vehicle()
+customer.buyVehicleInfo()
 
+customer2 = Plane()
+customer2.buyVehicleInfo()
+
+customer3 = Boat()
+customer3.buyVehicleInfo()
       
     
