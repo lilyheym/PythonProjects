@@ -9,6 +9,6 @@ class Fruit:     #class
 
 
 
-fruit = Fruit()
+fruit = Fruit()   #object
 fruit.meth()
 print(fruit)
