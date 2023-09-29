@@ -69,13 +69,62 @@ class ParentWindow(Frame):
             self.btnCancel = Button(self.master, text="Cancel", width = 10, height = 2, command = self.cancel)
             self.btnCancel.grid(row = 11, column = 1, padx = (0,90), pady = (30,0), sticky = NE)
 
+            self.btnDelete = Button(self,master, text = "Delete", width = 10, height = 2, command = self.delete)
+            self.btnDelete.grid(row = 13, column = 1, padx = (0,0), pady = (30,0), sticky = NE)
+
+         
+
             
 
 
       def submit(self):
-            fn = self.varFName.get()
-            ln = self.varLName.get()
-            self.lblDisplay.config(text = 'Hello {} {}!'.format(fn,ln))
+            conn = sqlite3.connect('students.db')
+            with conn:
+                  cursor = conn.cursor()
+                  cursor.execute("""INSERT INTO tbl_students (col_fname, col_lname, col_phone, col_email, col_course) VALUES (?,?,?,?,?);""",  )
+                  onClear(self)
+            conn.commit()
+            conn.close()
+
+
+      def onClear(self):
+            self.txt_fname.delete(0,END)
+            self.txt_lname.delete(0,END)
+            self.txt_phone.delete(0,END)
+            self.txt_email.delete(0,END)
+            self.txt_course.delete(0,END)
+
+            def onDeleted(self):
+                 
+                  self.txt_fname.delete(0,END)
+                  self.txt_lname.delete(0,END)
+                  self.txt_phone.delete(0,END)
+                  self.txt_email.delete(0,END)
+                  self.txt_course.delete(0,END)
+
+
+      def delete(self):
+            conn = sqlite3.connect('students.db')
+            with conn:
+                  cur = con.cursor()
+                  count = cur.execute("""SELECT COUNT(*) FROM tbl_students""")
+                  count = cur.fetchone()[0]
+                  if count > 1:
+                        confirm = messagebox.askokcancel("Delete Confirmation", "All information will be permenantly deleted from the database. \n\nProceed with the deletion request?")
+                        if confirm:
+                              con = sqlite3.connect('students.db')
+                              with conn:
+                                    cursor = conn.cursor()
+                                    cursor.execute("""DELETE FROM tbl_students WHERE col_fname  = '{}' AND col_lname = '{}'""".format(varFname,varLName))
+                              onDeleted(self) # call the function to clear all of the textboxes and the selected index of listbox
+      #####                   onRefresh(self)  # update the listbox of the changes
+                              conn.commit()
+                  else:
+                        confirm = messagebox.showerror("Last Record Error", "({}) is the last record in the database and cannot be deleted at this time.   \n\nPlease add another record first before you can delete ({}).".format(var_select, var_select))
+            conn.close()
+
+            
+                  
 
 
       def cancel (self):
@@ -85,23 +134,16 @@ class ParentWindow(Frame):
             
 
 
-def create_db(self):
-      conn = sqlite3.connect('studentTracking.db')
-      with conn:
-            cur = conn.cursor()
-            cur.execute("CREATE TABLE if not exists tbl_phonebook( \
-                  ID IDENTIFIER PRIMARY KEY AUTOINCREMENT, \
-                  col_fname TEXT, \
-                  col_lname TEXT, \
-                  col_phone TEXT, \
-                  col_email TEXT, \
-                  col_course TEXT \
-                  );")
-            # You must commit() to save changes and close the database connection
-            conn.commit()
-      conn.close()
+conn = sqlite3.connect('students.db')
+with conn:
+      cur = conn.cursor()
+      cur.execute("CREATE TABLE IF NOT EXISTS tbl_students (ID INTEGER PRIMARY KEY AUTOINCREMENT, col_fname TEXT, col_lname TEXT, col_phone TEXT, col_email TEXT, col_course TEXT);")
+                            
+      conn.commit()
       
-            
+                              
+
+
 
 
       
