@@ -11,7 +11,7 @@ import phonebook_func
 def load_gui(self):
 
 
-      self.lbl_fname = tk.Label(self.master, text = 'First Name: ', font = ('Arial', 16), fg = 'black', bg = 'lightgray')
+      self.lbl_fname = tk.Label(self.master, text = 'First Name: ')
       self.lbl_fname.grid(row = 0, column = 0, padx = (27,0), pady = (10,0), sticky = N+W)
       self.lbl_lname = tk.Label(self.master, text = 'Last Name: ')
       self.lbl_lname.grid(row = 2, column = 0, padx = (27,0), pady = (10,0), sticky = N+W)

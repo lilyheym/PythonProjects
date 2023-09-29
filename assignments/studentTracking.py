@@ -6,7 +6,7 @@ import sqlite3
 
 class ParentWindow(Frame):
       def __init__ (self,master):
-            Frame.__init__ (self)
+            Frame.__init__ (self, master)
 
             self.master = master
             self.master.resizable(width = False, height = False)
@@ -63,13 +63,13 @@ class ParentWindow(Frame):
             
             # buttons
             
-            self.btnSubmit = Button(self.master, text="Submit", width = 10, height = 2, command = self.submit)
+            self.btnSubmit = Button(self.master, text="Submit", width = 10, height = 2, command = lambda: self.submit())
             self.btnSubmit.grid(row = 11, column = 1, padx = (0,0), pady = (30,0), sticky = NE)
 
-            self.btnCancel = Button(self.master, text="Cancel", width = 10, height = 2, command = self.cancel)
+            self.btnCancel = Button(self.master, text="Cancel", width = 10, height = 2, command = lambda: self.cancel())
             self.btnCancel.grid(row = 11, column = 1, padx = (0,90), pady = (30,0), sticky = NE)
 
-            self.btnDelete = Button(self,master, text = "Delete", width = 10, height = 2, command = self.delete)
+            self.btnDelete = Button(self.master, text = "Delete", width = 10, height = 2, command = lambda: self.delete())
             self.btnDelete.grid(row = 13, column = 1, padx = (0,0), pady = (30,0), sticky = NE)
 
          
@@ -78,35 +78,37 @@ class ParentWindow(Frame):
 
 
       def submit(self):
+            fname = self.txtFName.get()
+            lname = self.txtLName.get()
+            phone = self.txtPhone.get()
+            email = self.txtEmail.get()
+            course = self.txtCourse.get()
+
+      
+            
             conn = sqlite3.connect('students.db')
             with conn:
                   cursor = conn.cursor()
-                  cursor.execute("""INSERT INTO tbl_students (col_fname, col_lname, col_phone, col_email, col_course) VALUES (?,?,?,?,?);""",  )
-                  onClear(self)
+                  cursor.execute("""INSERT INTO tbl_students (col_fname, col_lname, col_phone, col_email, col_course)\
+                                          VALUES (?,?,?,?,?);""",  (fname, lname, phone, email, course))
+                  
             conn.commit()
             conn.close()
 
 
-      def onClear(self):
+      def onDeleted(self):
+           
             self.txt_fname.delete(0,END)
             self.txt_lname.delete(0,END)
             self.txt_phone.delete(0,END)
             self.txt_email.delete(0,END)
             self.txt_course.delete(0,END)
 
-            def onDeleted(self):
-                 
-                  self.txt_fname.delete(0,END)
-                  self.txt_lname.delete(0,END)
-                  self.txt_phone.delete(0,END)
-                  self.txt_email.delete(0,END)
-                  self.txt_course.delete(0,END)
-
 
       def delete(self):
             conn = sqlite3.connect('students.db')
             with conn:
-                  cur = con.cursor()
+                  cur = conn.cursor()
                   count = cur.execute("""SELECT COUNT(*) FROM tbl_students""")
                   count = cur.fetchone()[0]
                   if count > 1:
@@ -119,10 +121,7 @@ class ParentWindow(Frame):
                               onDeleted(self) # call the function to clear all of the textboxes and the selected index of listbox
       #####                   onRefresh(self)  # update the listbox of the changes
                               conn.commit()
-                  else:
-                        confirm = messagebox.showerror("Last Record Error", "({}) is the last record in the database and cannot be deleted at this time.   \n\nPlease add another record first before you can delete ({}).".format(var_select, var_select))
-            conn.close()
-
+                                           
             
                   
 
@@ -130,7 +129,7 @@ class ParentWindow(Frame):
       def cancel (self):
             self.master.destroy()
 
-      
+
             
 
 

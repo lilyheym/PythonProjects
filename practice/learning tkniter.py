@@ -24,7 +24,7 @@ class ParentWindow(Frame):
             self.lblLName.grid(row = 1, column = 0, padx = (30,0), pady = (30,0))
 
 
-            self.lblDisplay = Label(self.master,text = '', font = ("Helvectica", 16),fg = 'black', bg = 'lightgray' )
+            elf.lblDisplay = Label(self.master,text = '', font = ("Helvectica", 16),fg = 'black', bg = 'lightgray' )
             self.lblDisplay.grid(row = 3, column = 1, padx =(30,0), pady = (30,0))
 
             

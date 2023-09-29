@@ -12,7 +12,7 @@ import phonebook_gui
 
 def center_window(self, w, h): # pass in the tkinter frame(master) reference with the w and h
       # get user's screen width and height
-      screen_widrh = self.master.winfo_screenwidth()
+      screen_width = self.master.winfo_screenwidth()
       screen_height = self.master.winfo_screenheight()
       # calculate x and y coordinates to paint the app centered on the user's screen
       x = int((screen_width/2) - (w/2))
@@ -147,7 +147,7 @@ def onDelete(self):
                         with conn:
                               cursor = conn.cursor()
                               cursor.execute("""DELETE FROM tbl_phonebook WHERE col_fullname = '{}'""".format(var_select))
-                        onDelete(self) # call the function to clear all of the textboxes and the selected index of listbox
+                        onDeleted(self) # call the function to clear all of the textboxes and the selected index of listbox
 #####                   onRefresh(self)  # update the listbox of the changes
                         conn.commit()
             else:
