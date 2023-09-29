@@ -1,10 +1,14 @@
+class Fruit:     #class
+      def __init__ (self):
+            self._protected = 'protected'   #protected variable
+            self.__private = 'private'    #private variable
+            
+      def meth(self):  #method to print
+            print(self._protected)
+            print(self.__private)
 
 
-class Private(self, private):
-      self.__privateVar = private
 
-
-obj = Protected()
-obj.getPrivate()
-obj.setPrivate("This is a private variable")
-obj.getPtivate()
+fruit = Fruit()
+fruit.meth()
+print(fruit)
