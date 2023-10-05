@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import *
 import tkinter.filedialog
 import os
+import datetime
 import shutil
-from datetime import datetime, timedelta, date
+from datetime import timedelta
 
 
 
@@ -83,21 +84,28 @@ class ParentWindow(Frame):
            
             # Runs through each file in the source directory
             for i in source_files:
-                  x = datetime.now()
-                  if i.endswith('.txt'):
-                        y = os.path.getmtime(i)
-                  def get_difference(date1, date2):
-                        delta = date2 - date1
-                        
-            d1 = datetime.strptime(x, "%Y/%m/%d")
-            d2 = datetime.strptime(y, "%Y/%m/%d")
-            days = get_difference(d1, d2)
+                  
+                  # pass source here to get ile path and file source
+                  file_path = os.path.join(source, i)
 
-            if days < 1:
-                 
-                 
-                  # moves each file from the source to the destination
-                  shutil.move(source + '/' + i, destination)
+                  # Calculate the last 24 hours
+                  hours_ago_24 = datetime.datetime.now() - timedelta(hours = 24)
+
+                  # Create variable to store the modification time
+                  modification_time = os.path.getmtime(file_path)
+
+                  # Returns the date of the timestamp(modification time)
+                  date_time_of_file = datetime.datetime.fromtimestamp(modification_time)
+
+                  # Compare if the file has been modified in the last 24 hours
+                  if hours_ago_24 < date_time_of_file:
+      
+                  
+                        # moves each file from the source to the destination
+                        shutil.move(source + '/' + i, destination)
+
+                        # success message to verify
+                        print(i + ' was succeddfully transferred.')
 
 
       # Creates function to exit program
